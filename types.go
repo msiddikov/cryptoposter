@@ -1,13 +1,17 @@
 package cryptoposter
 
+import "cryptoposter/types"
+
 type (
 	CryptoPoster struct {
-		config Config
-		opts   NewCLientOpts
+		config  config
+		opts    NewCLientOpts
+		execute func(types.Auth, types.ExecOptions)
 	}
 
-	Config struct {
-		Exchange exchange
+	config struct {
+		exchange exchange
+		auth     types.Auth
 	}
 
 	NewCLientOpts struct {
@@ -19,4 +23,9 @@ type (
 	}
 
 	exchange int
+)
+
+const (
+	Deribit exchange = iota
+	Bitmex
 )
