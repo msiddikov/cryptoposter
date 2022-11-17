@@ -2,13 +2,14 @@ package bitmex
 
 import (
 	"context"
-	"cryptoposter/types"
 	"fmt"
 	"log"
 	"net/http"
 	"strconv"
 	"strings"
 	"time"
+
+	"github.com/msiddikov/cryptoposter/types"
 
 	lvn "github.com/Lavina-Tech-LLC/lavinagopackage/v2"
 	"github.com/antihax/optional"

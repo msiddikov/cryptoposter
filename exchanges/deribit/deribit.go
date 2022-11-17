@@ -1,11 +1,12 @@
 package deribit
 
 import (
-	"cryptoposter/types"
 	"fmt"
 	"log"
 	"math"
 	"time"
+
+	"github.com/msiddikov/cryptoposter/types"
 
 	lvn "github.com/Lavina-Tech-LLC/lavinagopackage/v2"
 	"github.com/frankrap/deribit-api"

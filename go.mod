@@ -1,4 +1,4 @@
-module cryptoposter
+module github.com/msiddikov/cryptoposter
 
 go 1.19
 

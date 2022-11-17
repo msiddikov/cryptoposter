@@ -1,10 +1,10 @@
 package cryptoposter
 
 import (
-	"cryptoposter/exchanges/bitmex"
-	"cryptoposter/exchanges/deribit"
-	"cryptoposter/types"
 	"fmt"
+	"github.com/msiddikov/cryptoposter/exchanges/bitmex"
+	"github.com/msiddikov/cryptoposter/exchanges/deribit"
+	"github.com/msiddikov/cryptoposter/types"
 )
 
 func New(o NewCLientOpts) (CryptoPoster, error) {

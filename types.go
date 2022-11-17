@@ -1,6 +1,6 @@
 package cryptoposter
 
-import "cryptoposter/types"
+import "github.com/msiddikov/cryptoposter/types"
 
 type (
 	CryptoPoster struct {
