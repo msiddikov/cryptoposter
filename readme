@@ -1,0 +1,7 @@
+Usage:
+
+first add this repo to private:
+go env -w GOPRIVATE=github.com/msiddikov/cryptoposter
+
+then go get:
+go get github.com/msiddikov/cryptoposter
