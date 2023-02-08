@@ -59,8 +59,8 @@ func (cp *CryptoPoster) ExecuteSync(opts types.ExecOptions) (types.ExecRes, erro
 	return types.ExecRes{}, fmt.Errorf("channel unexpectedly closed")
 }
 
-func GetAvailableExchanges() []exchange {
-	return []exchange{
+func GetAvailableExchanges() []Exchange {
+	return []Exchange{
 		Deribit,
 		Bitmex,
 		BinanceUSDM,

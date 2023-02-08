@@ -10,23 +10,23 @@ type (
 	}
 
 	config struct {
-		exchange exchange
+		exchange Exchange
 		auth     types.Auth
 	}
 
 	NewCLientOpts struct {
-		Exchange   exchange
+		Exchange   Exchange
 		Key        string
 		Secret     string
 		Subaccount string
 		Testnet    bool
 	}
 
-	exchange int
+	Exchange int
 )
 
 const (
-	Deribit exchange = iota
+	Deribit Exchange = iota
 	Bitmex
 	BinanceUSDM
 )
