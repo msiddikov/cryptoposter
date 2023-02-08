@@ -42,10 +42,23 @@ type (
 		Size     float64
 		ResChan  chan ExecRes
 		Symbol   string
+		Leverage int
 		IsMarket bool
 	}
 	Quote struct {
 		Bid float64
 		Ask float64
+	}
+
+	HttpClient struct {
+		Host   string
+		Key    string
+		Secret string
+	}
+
+	Asset struct {
+		Exchange string
+		Symbol   string
+		Amount   float64
 	}
 )

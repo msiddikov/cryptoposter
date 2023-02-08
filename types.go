@@ -28,4 +28,5 @@ type (
 const (
 	Deribit exchange = iota
 	Bitmex
+	BinanceUSDM
 )
