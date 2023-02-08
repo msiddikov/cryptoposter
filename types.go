@@ -30,3 +30,11 @@ const (
 	Bitmex
 	BinanceUSDM
 )
+
+func (e *Exchange) String() string {
+	return []string{
+		"Deribit",
+		"Bitmex",
+		"Binance USDM",
+	}[*e]
+}
