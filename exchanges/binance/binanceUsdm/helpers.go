@@ -2,6 +2,7 @@ package binanceUsdm
 
 import (
 	lvn "github.com/Lavina-Tech-LLC/lavinagopackage/v2"
+	"github.com/msiddikov/cryptoposter/types"
 	"github.com/shopspring/decimal"
 )
 
@@ -10,7 +11,9 @@ func roundSize(symbol string, size decimal.Decimal) decimal.Decimal {
 	return size.Round(int32(s.QuantityPrecision))
 }
 
-func getNextPrice(symbol, side string, price decimal.Decimal) decimal.Decimal {
+func getNextPrice(symbol, side string, order types.Quote) decimal.Decimal {
+	priceFloat := lvn.Ternary(side == "BUY", order.Bid, order.Ask)
+	price := decimal.NewFromFloat(priceFloat)
 	s := exInfo.GetSymbol(symbol)
 	step := lvn.Ternary(s.PricePrecision, 1/float64(s.PricePrecision), 0)
 	stepDec := decimal.NewFromFloat(step)

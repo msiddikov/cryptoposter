@@ -40,6 +40,7 @@ type (
 		Id       string
 		Side     string
 		Size     float64
+		Notion   float64
 		ResChan  chan ExecRes
 		Symbol   string
 		Leverage int
