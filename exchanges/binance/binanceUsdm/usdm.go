@@ -49,6 +49,7 @@ func Execute(auth types.Auth, opts types.ExecOptions) {
 			opts.ResChan <- types.ExecRes{Err: err}
 			return
 		}
+		time.Sleep(500 * time.Millisecond)
 		CancelOrder(auth, order.OrderId, opts.Symbol)
 		order, err = OrderInfo(auth, order.OrderId, opts.Symbol)
 		if err != nil {
