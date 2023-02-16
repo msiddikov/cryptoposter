@@ -49,6 +49,9 @@ func (cp *CryptoPoster) Execute(opts types.ExecOptions) {
 }
 
 func (cp *CryptoPoster) ExecuteSync(opts types.ExecOptions) (types.ExecRes, error) {
+	if opts.ResChan == nil {
+		opts.ResChan = make(chan types.ExecRes, 10)
+	}
 	cp.execute(cp.config.auth, opts)
 
 	for res := range opts.ResChan {

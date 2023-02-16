@@ -32,7 +32,12 @@ func Execute(auth types.Auth, opts types.ExecOptions) {
 	sum := decimal.NewFromInt(0)
 	qty := decimal.NewFromInt(0)
 
-	size := roundSize(opts.Symbol, decimal.NewFromFloat(opts.Size))
+	size, err := getSize(auth, opts)
+	if err != nil {
+		lvn.Logger.Errorf("%v", err)
+		opts.ResChan <- types.ExecRes{Err: err}
+		return
+	}
 	remQty := size
 
 	cycleCount := 0
@@ -44,6 +49,7 @@ func Execute(auth types.Auth, opts types.ExecOptions) {
 			opts.ResChan <- types.ExecRes{Err: err}
 			return
 		}
+		time.Sleep(500 * time.Millisecond)
 		CancelOrder(auth, order.OrderId, opts.Symbol)
 		order, err = OrderInfo(auth, order.OrderId, opts.Symbol)
 		if err != nil {
@@ -110,8 +116,7 @@ func NewOrder(auth types.Auth, side, symbol string, size decimal.Decimal) (order
 		return order{}, fmt.Errorf("order size cannot be 0")
 	}
 
-	price := lvn.Ternary(side == "BUY", orderBook.Bid, orderBook.Ask)
-	priceDec := getNextPrice(symbol, side, decimal.NewFromFloat(price))
+	priceDec := getNextPrice(symbol, side, orderBook)
 
 	resp, err := fetch[order](&auth, reqParams{
 		Method:     "POST",
@@ -226,4 +231,20 @@ func OrderInfo(auth types.Auth, orderId int, symbol string) (order, error) {
 	})
 
 	return resp.Resp, err
+}
+
+func getSize(auth types.Auth, opts types.ExecOptions) (decimal.Decimal, error) {
+	size := decimal.NewFromFloat(opts.Size)
+
+	if opts.Size == 0 {
+		quote, err := GetPrice(auth, opts.Symbol)
+		if err != nil {
+			return decimal.Zero, err
+		}
+		price := getNextPrice(opts.Symbol, opts.Side, quote)
+		size = decimal.NewFromFloat(opts.Notion).Div(price)
+	}
+
+	return roundSize(opts.Symbol, size), nil
+
 }
