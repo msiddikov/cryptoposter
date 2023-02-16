@@ -55,7 +55,7 @@ func Execute(auth types.Auth, opts types.ExecOptions) {
 		qty = qty.Add(order.ExecutedQtyParsed)
 		sumCur := order.ExecutedQtyParsed.Mul(order.AvgPriceParsed)
 		sum = sum.Add(sumCur)
-		remQty = roundSize(opts.Symbol, remQty.Sub(qty))
+		remQty = roundSize(opts.Symbol, remQty.Sub(order.ExecutedQtyParsed))
 		cycleCount++
 	}
 	if cycleCount != 0 {

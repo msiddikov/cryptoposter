@@ -74,7 +74,7 @@ func TestExecute(t *testing.T) {
 
 	res, err := client.ExecuteSync(types.ExecOptions{
 		Side:     "SELL",
-		Size:     0.008,
+		Size:     0.161,
 		Symbol:   "BTCUSDT",
 		ResChan:  make(chan types.ExecRes, 10),
 		Leverage: 50,
